@@ -607,6 +607,7 @@ function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage
         var button = new Service.StatelessProgrammableSwitch(this.buttons[index].name, '' + index);
         button.getCharacteristic(Characteristic.ProgrammableSwitchEvent).setProps(GetStatelessSwitchProps(single_press, double_press, long_press));
         button.getCharacteristic(Characteristic.ServiceLabelIndex).setValue(index + 1);
+        button.setCharacteristic(Characteristic.Manufacturer, "Hibbum Electronics").setCharacteristic(Characteristic.Model, "Model").setCharacteristic(Characteristic.SerialNumber, "1234")
         this.service.push(button);
     }
     this.changeHandler = (function (buttonName, event) {
