@@ -599,7 +599,7 @@ function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage
     this.name = statelessSwitchConfig["name"];
     this.buttons = statelessSwitchConfig["buttons"] || [];
 
-    this.accessory.getService(Service.AccessoryInformation)
+    this.getService(Service.AccessoryInformation)
       .setCharacteristic(Characteristic.Manufacturer, "Hibbum")
       .setCharacteristic(Characteristic.Model, "Device")
       .setCharacteristic(Characteristic.SerialNumber, "Serienummer")
