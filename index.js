@@ -623,10 +623,6 @@ function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage
         this.service.push(button);
     }
 
-    
-
-    this.service.push(informationService)
-
     this.changeHandler = (function (buttonName, event) {
           for(var index = 0; index < this.service.length; index++ ){
             var serviceName = this.service[index].getCharacteristic(Characteristic.Name).value;
