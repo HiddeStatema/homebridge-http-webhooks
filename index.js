@@ -521,8 +521,7 @@ function createAccessoryInformation() {
   const informationService = new Service.AccessoryInformation()
     .setCharacteristic(Characteristic.Manufacturer, 'Hibbum Electronics')
     .setCharacteristic(Characteristic.SerialNumber, 'c18cb255d5d74fbb')
-    .setCharacteristic(Characteristic.Model, 'Stateless Switch')
-    .setCharacteristic(Characteristic.Firmware, '1.0');
+    .setCharacteristic(Characteristic.Model, 'Stateless Switch');
 
   return informationService;
 }
