@@ -415,7 +415,7 @@ function HttpWebHookSensorAccessory(log, sensorConfig, storage) {
   this.storage = storage;
 
   if (this.type === "contact") {
-    this.service = new Service.ContactSensor(this.name);
+    this.serviceNamee = new Service.ContactSensor(this.name);
     this.changeHandler = (function(newState) {
       this.log("Change HomeKit state for contact sensor to '%s'.", newState);
       this.service.getCharacteristic(Characteristic.ContactSensorState).updateValue(newState ? Characteristic.ContactSensorState.CONTACT_DETECTED : Characteristic.ContactSensorState.CONTACT_NOT_DETECTED, undefined, CONTEXT_FROM_WEBHOOK);
@@ -599,6 +599,12 @@ function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage
     this.name = statelessSwitchConfig["name"];
     this.buttons = statelessSwitchConfig["buttons"] || [];
 
+    this.accessory.getService(Service.AccessoryInformation)
+      .setCharacteristic(Characteristic.Manufacturer, "Hibbum")
+      .setCharacteristic(Characteristic.Model, "Device")
+      .setCharacteristic(Characteristic.SerialNumber, "Serienummer")
+      .setCharacteristic(Characteristic.FirmwareRevision, "1.3.3.7");
+
     this.service = [];
     for(var index=0; index< this.buttons.length; index ++){
       var single_press = this.buttons[index]["single_press"] == undefined ? true : this.buttons[index]["single_press"];
@@ -607,7 +613,6 @@ function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage
         var button = new Service.StatelessProgrammableSwitch(this.buttons[index].name, '' + index);
         button.getCharacteristic(Characteristic.ProgrammableSwitchEvent).setProps(GetStatelessSwitchProps(single_press, double_press, long_press));
         button.getCharacteristic(Characteristic.ServiceLabelIndex).setValue(index + 1);
-        button.setCharacteristic(Characteristic.Manufacturer, "Hibbum Electronics").setCharacteristic(Characteristic.Model, "Model").setCharacteristic(Characteristic.SerialNumber, "1234")
         this.service.push(button);
     }
     this.changeHandler = (function (buttonName, event) {
