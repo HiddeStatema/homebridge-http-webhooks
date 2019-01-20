@@ -517,8 +517,18 @@ HttpWebHookSensorAccessory.prototype.getState = function(callback) {
   }
 };
 
+function createAccessoryInformation() {
+  const informationService = new Service.AccessoryInformation()
+    .setCharacteristic(Characteristic.Manufacturer, 'Hibbum Electronics')
+    .setCharacteristic(Characteristic.Model, 'Model');
+
+  return informationService;
+}
+
 HttpWebHookSensorAccessory.prototype.getServices = function() {
-  return [ this.service ];
+  var services = [ this.service ];
+  services.push(createAccessoryInformation())
+  return services;
 };
 
 function HttpWebHookSwitchAccessory(log, switchConfig, storage) {
@@ -589,7 +599,9 @@ HttpWebHookSwitchAccessory.prototype.setState = function(powerOn, callback, cont
 };
 
 HttpWebHookSwitchAccessory.prototype.getServices = function() {
-  return [ this.service ];
+  var services = [ this.service ];
+  services.push(createAccessoryInformation())
+  return services;
 };
 
 function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage) {
@@ -611,13 +623,8 @@ function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage
         this.service.push(button);
     }
 
-    const informationService = new Service.AccessoryInformation()
-      .setCharacteristic(Characteristic.Manufacturer, 'Hibbum Electronics')
-      .setCharacteristic(Characteristic.Model, 'Model')
-      .setCharacteristic(Characteristic.SerialNumber, '1234');
-    this.log("Characteristic")
-    this.log(Characteristic)
     
+
     this.service.push(informationService)
 
     this.changeHandler = (function (buttonName, event) {
@@ -683,7 +690,9 @@ function GetStatelessSwitchProps(single_press, double_press, long_press) {
 }
 
 HttpWebHookStatelessSwitchAccessory.prototype.getServices = function () {
-    return this.service;
+  var services = this.service;
+  services.push(createAccessoryInformation())
+  return services;
 };
 
 function HttpWebHookPushButtonAccessory(log, pushButtonConfig, storage) {
@@ -748,7 +757,9 @@ HttpWebHookPushButtonAccessory.prototype.setState = function(powerOn, callback, 
 };
 
 HttpWebHookPushButtonAccessory.prototype.getServices = function() {
-  return [ this.service ];
+  var services = [ this.service ]
+  services.push(createAccessoryInformation())
+  return services;
 };
 
 function HttpWebHookLightAccessory(log, lightConfig, storage) {
@@ -809,7 +820,9 @@ HttpWebHookLightAccessory.prototype.setState = function(powerOn, callback, conte
 };
 
 HttpWebHookLightAccessory.prototype.getServices = function() {
-  return [ this.service ];
+  var services = [ this.service ];
+  services.push(createAccessoryInformation())
+  return services;
 };
 
 function HttpWebHookThermostatAccessory(log, thermostatConfig, storage) {
@@ -946,7 +959,9 @@ HttpWebHookThermostatAccessory.prototype.getCurrentHeatingCoolingState = functio
 };
 
 HttpWebHookThermostatAccessory.prototype.getServices = function() {
-  return [ this.service ];
+  var services = [ this.service ];
+  services.push(createAccessoryInformation())
+  return services;
 };
 
 
@@ -1047,7 +1062,9 @@ HttpWebHookGarageDoorOpenerAccessory.prototype.getObstructionDetected = function
 };
 
 HttpWebHookGarageDoorOpenerAccessory.prototype.getServices = function() {
-  return [ this.service ];
+  var services = [ this.service ];
+  services.push(createAccessoryInformation())
+  return services;
 };
 
 function HttpWebHookLockMechanismAccessory(log, lockMechanismOpenerConfig, storage) {
@@ -1132,7 +1149,9 @@ HttpWebHookLockMechanismAccessory.prototype.getLockCurrentState = function(callb
 };
 
 HttpWebHookLockMechanismAccessory.prototype.getServices = function() {
-  return [ this.service ];
+  var services = [ this.service ];
+  services.push(createAccessoryInformation())
+  return services;
 };
 
 
@@ -1209,7 +1228,9 @@ HttpWebHookOutletAccessory.prototype.setState = function(powerOn, callback, cont
 };
 
 HttpWebHookOutletAccessory.prototype.getServices = function() {
-  return [ this.service ];
+  var services = [ this.service ];
+  services.push(createAccessoryInformation())
+  return services;
 };
 
 function HttpWebHookSecurityAccessory(log, securityConfig, storage) {
@@ -1280,5 +1301,7 @@ HttpWebHookSecurityAccessory.prototype.getCurrentSecurityState = function(callba
 };
 
 HttpWebHookSecurityAccessory.prototype.getServices = function() {
-  return [ this.service ];
+  var services = [ this.service ];
+  services.push(createAccessoryInformation())
+  return services;
 };
