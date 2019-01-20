@@ -607,14 +607,16 @@ function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage
         var button = new Service.StatelessProgrammableSwitch(this.buttons[index].name, '' + index);
         button.getCharacteristic(Characteristic.ProgrammableSwitchEvent).setProps(GetStatelessSwitchProps(single_press, double_press, long_press));
         button.getCharacteristic(Characteristic.ServiceLabelIndex).setValue(index + 1);
-        button.getService(Service.AccessoryInformation)
-          .setCharacteristic(Characteristic.Manufacturer, "Hibbum")
-          .setCharacteristic(Characteristic.Model, "Device")
-          .setCharacteristic(Characteristic.SerialNumber, "Serienummer")
-          .setCharacteristic(Characteristic.FirmwareRevision, "1.3.3.7");
 
         this.service.push(button);
     }
+
+    const informationService = new Service.AccessoryInformation()
+      .setCharacteristic(homebridge.hap.Characteristic.Manufacturer, 'Hibbum Electronics')
+      .setCharacteristic(homebridge.hap.Characteristic.Model, 'Model')
+      .setCharacteristic(homebridge.hap.Characteristic.SerialNumber, '1234');
+    this.service.push(informationService)
+
     this.changeHandler = (function (buttonName, event) {
           for(var index = 0; index < this.service.length; index++ ){
             var serviceName = this.service[index].getCharacteristic(Characteristic.Name).value;
