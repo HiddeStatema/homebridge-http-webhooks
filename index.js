@@ -615,6 +615,9 @@ function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage
       .setCharacteristic(Characteristic.Manufacturer, 'Hibbum Electronics')
       .setCharacteristic(Characteristic.Model, 'Model')
       .setCharacteristic(Characteristic.SerialNumber, '1234');
+    this.log("Characteristic")
+    this.log(Characteristic)
+    
     this.service.push(informationService)
 
     this.changeHandler = (function (buttonName, event) {
