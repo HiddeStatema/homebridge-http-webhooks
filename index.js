@@ -612,9 +612,9 @@ function HttpWebHookStatelessSwitchAccessory(log, statelessSwitchConfig, storage
     }
 
     const informationService = new Service.AccessoryInformation()
-      .setCharacteristic(homebridge.hap.Characteristic.Manufacturer, 'Hibbum Electronics')
-      .setCharacteristic(homebridge.hap.Characteristic.Model, 'Model')
-      .setCharacteristic(homebridge.hap.Characteristic.SerialNumber, '1234');
+      .setCharacteristic(Characteristic.Manufacturer, 'Hibbum Electronics')
+      .setCharacteristic(Characteristic.Model, 'Model')
+      .setCharacteristic(Characteristic.SerialNumber, '1234');
     this.service.push(informationService)
 
     this.changeHandler = (function (buttonName, event) {
